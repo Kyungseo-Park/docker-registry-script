@@ -35,3 +35,4 @@ services:
 
 networks:
   registry-net:
+    external: true

@@ -4,9 +4,10 @@ services:
   registry-web:
     container_name: registry-web
     image: hyper/docker-registry-web:latest
+    restart: unless-stopped
     volumes:
        - ./conf/registry-web:/conf:ro
-       - ./db:/data
+       - ./data/registry-web:/data
     networks:
       - registry-net
     depends_on:
@@ -15,8 +16,20 @@ services:
   registry:
     container_name: registry
     image: registry:2.8.1
+    restart: unless-stopped
     volumes:
       - ./conf/registry:/etc/docker/registry:ro
+    networks:
+      - registry-net
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer:1.25.0
+    restart: unless-stopped
+    volumes:
+      - './data/portainer:/data'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    privileged: true
     networks:
       - registry-net
 

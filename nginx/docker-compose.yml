@@ -8,7 +8,6 @@ services:
     ports:
       - '80:80'
       - '443:443'
-      - '81:81' 
     environment:
       DB_MYSQL_HOST: nginx-db
       DB_MYSQL_PORT: 3306
@@ -16,7 +15,8 @@ services:
       DB_MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
       DB_MYSQL_NAME: ${DB_MYSQL_DATABASE}
     volumes:
-      - ./data:/data
+      - ../data/nginx:/data
+      - ./custom:/data/nginx/custom
       - ./letsencrypt:/etc/letsencrypt
     depends_on:
       - nginx-db
@@ -33,7 +33,7 @@ services:
       MYSQL_USER: ${DB_MYSQL_USER}
       MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - ../data/nginx-mysql:/var/lib/mysql
     networks:
       - registry-net
 

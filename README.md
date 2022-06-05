@@ -1,6 +1,6 @@
 ## What is this?
  - Scripts that install resources needed to manage servers with dockers
- - Currently, only the docker registry server and nginx proxy manager are supported.
+ - Currently, only the `docker registry server` and `nginx proxy manager` are supported.
 
 ## How to use?
  - If you want to use both?
@@ -10,7 +10,7 @@ cd docker-registry-script
 start.sh
 ```
 
- - You want to run only the 'docker registry' and the 'docker registry web'
+ - You want to run only the `docker registry`, `docker registry web` and `potainer`
 ``` bash
 git clone git@github.com:Kyungseo-Park/docker-registry-script.git
 cd docker-registry-script
@@ -18,7 +18,7 @@ cd docker-registry-script
 docker-compose up -d
 ```
 
- - You want to run only the 'nginx proxy maanger'
+ - You want to run only the `nginx proxy maanger`
  ``` bash
 git clone git@github.com:Kyungseo-Park/docker-registry-script.git
 cd docker-registry-script/nginx

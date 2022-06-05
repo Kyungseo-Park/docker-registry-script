@@ -1,9 +1,9 @@
-version: '2'
+version: '3'
+
 services:
   registry-web:
+    container_name: registry-web
     image: hyper/docker-registry-web:latest
-    ports:
-      - 8080:8080
     volumes:
        - ./conf/registry-web:/conf:ro
        - ./db:/data
@@ -11,10 +11,10 @@ services:
       - registry-net
     depends_on:
        - registry
+
   registry:
+    container_name: registry
     image: registry:2.8.1
-    ports:
-      - 5000:5000
     volumes:
       - ./conf/registry:/etc/docker/registry:ro
     networks:

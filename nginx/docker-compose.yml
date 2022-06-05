@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  nginx-app:
+    container_name: nginx-app
+    image: jc21/nginx-proxy-manager:2.9.18
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+      - '81:81' 
+    environment:
+      DB_MYSQL_HOST: nginx-db
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: ${DB_MYSQL_USER}
+      DB_MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
+      DB_MYSQL_NAME: ${DB_MYSQL_DATABASE}
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - nginx-db
+    networks:
+      - registry-net
+
+  nginx-db:
+    container_name: nginx-db
+    image: jc21/mariadb-aria:10.4.15
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_MYSQL_DATABASE}
+      MYSQL_USER: ${DB_MYSQL_USER}
+      MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    networks:
+      - registry-net
+
+networks:
+  registry-net:

@@ -25,6 +25,19 @@ cd docker-registry-script/nginx
 run.sh
 ```
 
+ - If you installed `nginx-proxy-manager`,
+Go to nginx-proxy-manager.domain.com
+```text 
+id : admin@example.com
+pw : changeme
+```
+
+## Docker conatiner hostname 
+ - docker registry admin page : `registry-web:8080`
+ - docker registry server : `registry:5000`
+ - portainer : `portainer:8000`
+    - Portainer will expose the UI over the port 8000
+    - Expose a TCP tunnel server over the port 9443
+
 ## Current problem
- - My server has port 81 blocked. So, you need to set up a proxy on port 81 of the proxy manager.
  - The proxy manager needs a list of accessible whitelists.
